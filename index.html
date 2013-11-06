@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>My first Three.js app</title>
+		<style>
+			canvas, video {
+				-webkit-transform: rotateY(180deg); 
+			}
+			#renderer { 
+				width: 100%; 
+				height: 100%; 
+				position:absolute; 
+				top:0; 
+				left:0; 
+				z-index:0; 
+			}
+			#markerDetect{
+				display:none;
+			}
+			#canvasRaster{
+				display:none; 
+			}
+			#markerTestRenderer{
+				position:absolute; 
+				left:0; 
+				z-index:100; 
+			}
+			#debugCanvas{
+				width:100%; 
+				left:0; 
+				position:absolute; 
+				z-index:-1;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script src="vendor/JSARToolKit.js"></script>
+		<script src="vendor/Three.js"></script>
+		<script src="vendor/requestanimationframe.js"></script>
+		<script src="js/shimUserMedia.js"></script>
+		<script src='threex.jsartoolkit.js'></script>
+		<script type="text/javascript" src="js/threejxhelper.js"></script>
+		<script src='js/tools.js'></script>
+		<script src='js/city.js'></script>
+	</head>
+	<body>	
+		<video width="320" height="280" id="markerDetect"></video>	
+		<div style="background:rgba(255,255,255,.4); display:block; z-index:1;">
+			<label>X position: </label><input id="xpos" name="xpos" type="range" min="-150" max="150" value="0">
+			<label>Y position: </label><input id="ypos" name="ypos" type="range" min="-150" max="150" value="0">
+			<label>Z position: </label><input id="zpos" name="zpos" type="range" min="-150" max="150" value="0">
+			<label>Color: </label><input id="color" name="color" type="color">
+			<button>Add New Building</button>
+		<div>
+		<script type="text/javascript">
+			//getuser media 
+			navigator.getUserMedia({video:true}, function(stream) {
+				var videoEl = document.getElementById('markerDetect'); 
+				videoEl.width	= 320;
+				videoEl.height	= 240;
+				videoEl.loop	= true;
+				videoEl.volume	= 0;
+				videoEl.autoplay= true;
+				videoEl.controls= true;
+				videoEl.src = window.URL.createObjectURL(stream); 
+				//$('#markerDetect').attr('src', window.URL.createObjectURL(stream));
+			}, function(error) {
+				alert("Couldn't access webcam.");
+			});
+		</script>
+	</body>
+</html>
